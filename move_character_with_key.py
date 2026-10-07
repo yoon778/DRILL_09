@@ -4,6 +4,7 @@ from pico2d import *
 WIDTH, HEIGHT = 800, 600
 SIZE = 100
 x, y = WIDTH / 2, HEIGHT / 2
+face = 1  # 1: 오른쪽, -1: 왼쪽
 keys = set()
 ARROWS = {SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_DOWN}
 
@@ -20,9 +21,12 @@ def handle_events():
 
 
 def update():
-    global x, y
+    global x, y, face
     dx = int(SDLK_RIGHT in keys) - int(SDLK_LEFT in keys)
     dy = int(SDLK_UP in keys) - int(SDLK_DOWN in keys)
+    # 위아래로만 움직일 때는 마지막 좌우 방향을 유지한다.
+    if dx:
+        face = dx
     x += dx * 2
     y += dy * 2
 
