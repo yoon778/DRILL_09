@@ -1,8 +1,13 @@
 from pico2d import *
 
 
+WIDTH, HEIGHT = 800, 600
+SIZE = 100
+x, y = WIDTH / 2, HEIGHT / 2
+
+
 def main():
-    open_canvas()
+    open_canvas(WIDTH, HEIGHT)
     hide_lattice()
     running = True
     while running:
