@@ -29,6 +29,8 @@ def handle_events():
 
 def update(dt):
     global x, y, face, moving, frame, frame_time
+    # 창 이동 등으로 오래 지연되어도 한 번에 크게 뛰지 않는다.
+    dt = min(max(dt, 0.0), 0.1)
     previous = (moving, face)
     dx = int(SDLK_RIGHT in keys) - int(SDLK_LEFT in keys)
     dy = int(SDLK_UP in keys) - int(SDLK_DOWN in keys)
