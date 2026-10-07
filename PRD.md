@@ -7,7 +7,7 @@ Python과 pico2d로 방향키에 따라 소년이 이동하고, 이동 방향과
 - 작업 폴더: `DRILL_09`
 - 전용 저장소: `https://github.com/yoon778/DRILL_09`
 - 작업 브랜치: 전용 저장소의 `main`
-- 구현 파일: 기존 `move_character_with_key.py`를 수정한다.
+- 구현 파일: 새 `boy_move.py`에 작성한다. 기존 `move_character_with_key.py`는 원본 상태로 보존한다.
 - 필수 리소스: `animation_sheet.png`, `TUK_GROUND.png`
 - 다른 실습 파일은 수정하지 않는다.
 
@@ -102,7 +102,7 @@ Python과 pico2d로 방향키에 따라 소년이 이동하고, 이동 방향과
 
 ## 7. 실행과 제출
 
-`DRILL_09` 폴더에서 `python move_character_with_key.py`로 실행한다. Python과 pico2d가 필요하며, 이미지 참조에는 `animation_sheet.png`, `TUK_GROUND.png`처럼 상대 경로를 사용한다.
+`DRILL_09` 폴더에서 `python boy_move.py`로 실행한다. Python과 pico2d가 필요하며, 이미지 참조에는 `animation_sheet.png`, `TUK_GROUND.png`처럼 상대 경로를 사용한다.
 
 제출 ZIP에는 실행 소스와 위 두 이미지를 포함하고, 과제 제출란에 조작 방법·구현 내용·필요한 실행 환경을 직접 작성한다. 필요하면 이 개발 문서도 첨부하고 제출란에 설명한다.
 
@@ -110,7 +110,7 @@ Python과 pico2d로 방향키에 따라 소년이 이동하고, 이동 방향과
 
 ## 8. 구현 완료와 확인 결과 — 2026-10-07
 
-30단계 계획에 따라 `move_character_with_key.py` 구현을 완료했다. 방향키로 이동하고 ESC 또는 창 닫기로 종료한다. 이동 속도는 200px/s, 애니메이션은 프레임당 0.1초이며 소년 전체가 화면 안에 머문다.
+30단계 계획에 따라 구현한 코드를 후속 수정에서 새 `boy_move.py`로 분리하고 기존 실습 파일은 원본으로 복원했다. 방향키로 이동하고 ESC 또는 창 닫기로 종료한다. 이동 속도는 200px/s, 애니메이션은 프레임당 0.1초이며 소년 전체가 화면 안에 머문다.
 
 - 입력 시뮬레이션으로 네 방향 이동·키 해제·반대 입력 상쇄·대각선 속도·위아래 이동 시 좌우 방향 유지를 확인했다.
 - 좌우 IDLE/이동 행과 8프레임 반복, 상태 전환 시 첫 프레임 재생을 확인했다.
@@ -119,4 +119,4 @@ Python과 pico2d로 방향키에 따라 소년이 이동하고, 이동 방향과
 - 소스와 두 이미지를 임시 폴더에 복사하고 다른 작업 경로에서 실제 800×600 SDL 창을 실행했다. 배경과 소년의 화면 버퍼, 이동 순서와 종료를 확인했다.
 - 이미지 누락 시 오류가 발생하고 창을 정리하는 것을 확인했다. 검증 도구와 캡처는 저장소에 포함하지 않았다.
 
-제출할 실행 파일은 `move_character_with_key.py`, `animation_sheet.png`, `TUK_GROUND.png` 세 개다. Python과 pico2d 설치가 필요하다. 제출란에는 상하좌우 이동, 방향 유지, IDLE, 화면 경계 제한을 구현했다고 적고 저장소 URL을 함께 안내한다. GitHub 푸시와 eclass 제출은 별도 요청 시 진행한다.
+제출할 실행 파일은 `boy_move.py`, `animation_sheet.png`, `TUK_GROUND.png` 세 개다. Python과 pico2d 설치가 필요하다. 제출란에는 상하좌우 이동, 방향 유지, IDLE, 화면 경계 제한을 구현했다고 적고 저장소 URL을 함께 안내한다. GitHub 푸시와 eclass 제출은 별도 요청 시 진행한다.
