@@ -6,7 +6,16 @@ SIZE = 100
 x, y = WIDTH / 2, HEIGHT / 2
 
 
+def draw():
+    clear_canvas()
+    ground.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+    # 시트 테두리 1px을 제외한 오른쪽 IDLE 첫 프레임
+    character.clip_draw(1, 301, SIZE, SIZE, x, y)
+    update_canvas()
+
+
 def main():
+    global ground, character
     open_canvas(WIDTH, HEIGHT)
     hide_lattice()
     ground = load_image('TUK_GROUND.png')
@@ -16,10 +25,7 @@ def main():
         for event in get_events():
             if event.type == SDL_QUIT:
                 running = False
-        clear_canvas()
-        ground.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
-        character.clip_draw(1, 301, SIZE, SIZE, x, y)
-        update_canvas()
+        draw()
         delay(0.01)
     close_canvas()
 
