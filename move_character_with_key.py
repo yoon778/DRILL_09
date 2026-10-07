@@ -37,7 +37,10 @@ def draw():
     clear_canvas()
     ground.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
     # pico2d는 이미지 아래쪽을 기준으로 행을 자른다.
-    row = 101 if face == 1 else 1
+    if moving:
+        row = 101 if face == 1 else 1
+    else:
+        row = 301 if face == 1 else 201
     character.clip_draw(1, row, SIZE, SIZE, x, y)
     update_canvas()
 
