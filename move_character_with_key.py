@@ -21,7 +21,7 @@ def handle_events():
 
 def update():
     global x
-    dx = int(SDLK_RIGHT in keys)
+    dx = int(SDLK_RIGHT in keys) - int(SDLK_LEFT in keys)
     x += dx * 2
 
 
