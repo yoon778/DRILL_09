@@ -26,6 +26,9 @@ def handle_events():
             keys.add(event.key)
         elif event.type == SDL_KEYUP:
             keys.discard(event.key)
+    # pico2d의 get_events는 창 포커스 이벤트를 전달하지 않는다.
+    if not SDL_GetKeyboardFocus():
+        keys.clear()
 
 
 def update(dt):
