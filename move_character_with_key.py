@@ -10,6 +10,7 @@ def main():
     open_canvas(WIDTH, HEIGHT)
     hide_lattice()
     ground = load_image('TUK_GROUND.png')
+    character = load_image('animation_sheet.png')
     running = True
     while running:
         for event in get_events():
@@ -17,6 +18,7 @@ def main():
                 running = False
         clear_canvas()
         ground.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+        character.clip_draw(0, 300, SIZE, SIZE, x, y)
         update_canvas()
         delay(0.01)
     close_canvas()
