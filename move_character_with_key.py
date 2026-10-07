@@ -20,9 +20,11 @@ def handle_events():
 
 
 def update():
-    global x
+    global x, y
     dx = int(SDLK_RIGHT in keys) - int(SDLK_LEFT in keys)
+    dy = int(SDLK_UP in keys)
     x += dx * 2
+    y += dy * 2
 
 
 def draw():
