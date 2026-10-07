@@ -33,6 +33,7 @@ def update(dt):
     # 창 이동 등으로 오래 지연되어도 한 번에 크게 뛰지 않는다.
     dt = min(max(dt, 0.0), 0.1)
     previous = (moving, face)
+    old_x, old_y = x, y
     dx = int(SDLK_RIGHT in keys) - int(SDLK_LEFT in keys)
     dy = int(SDLK_UP in keys) - int(SDLK_DOWN in keys)
     # 위아래로만 움직일 때는 마지막 좌우 방향을 유지한다.
@@ -45,7 +46,8 @@ def update(dt):
     y += dy * SPEED * dt
     x = min(max(x, SIZE / 2), WIDTH - SIZE / 2)
     y = min(max(y, SIZE / 2), HEIGHT - SIZE / 2)
-    moving = bool(dx or dy)
+    # 경계 제한 뒤 실제 좌표가 변했을 때만 이동 동작을 재생한다.
+    moving = (x, y) != (old_x, old_y)
     if previous != (moving, face):
         frame, frame_time = 0, 0.0
     else:
