@@ -6,6 +6,9 @@ SIZE = 100
 x, y = WIDTH / 2, HEIGHT / 2
 face = 1  # 1: 오른쪽, -1: 왼쪽
 moving = False
+frame = 0
+frame_time = 0.0
+FRAME_DELAY = 0.1
 keys = set()
 ARROWS = {SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_DOWN}
 
@@ -21,8 +24,8 @@ def handle_events():
             keys.discard(event.key)
 
 
-def update():
-    global x, y, face, moving
+def update(dt):
+    global x, y, face, moving, frame, frame_time
     dx = int(SDLK_RIGHT in keys) - int(SDLK_LEFT in keys)
     dy = int(SDLK_UP in keys) - int(SDLK_DOWN in keys)
     # 위아래로만 움직일 때는 마지막 좌우 방향을 유지한다.
@@ -31,6 +34,10 @@ def update():
     x += dx * 2
     y += dy * 2
     moving = bool(dx or dy)
+    frame_time += dt
+    while frame_time >= FRAME_DELAY:
+        frame = (frame + 1) % 8
+        frame_time -= FRAME_DELAY
 
 
 def draw():
@@ -41,7 +48,7 @@ def draw():
         row = 101 if face == 1 else 1
     else:
         row = 301 if face == 1 else 201
-    character.clip_draw(1, row, SIZE, SIZE, x, y)
+    character.clip_draw(1 + frame * SIZE, row, SIZE, SIZE, x, y)
     update_canvas()
 
 
@@ -54,7 +61,7 @@ def main():
     running = True
     while running:
         handle_events()
-        update()
+        update(0.01)
         draw()
         delay(0.01)
     close_canvas()
