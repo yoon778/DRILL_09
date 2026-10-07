@@ -4,6 +4,8 @@ from pico2d import *
 WIDTH, HEIGHT = 800, 600
 SIZE = 100
 x, y = WIDTH / 2, HEIGHT / 2
+keys = set()
+ARROWS = {SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_DOWN}
 
 
 def handle_events():
@@ -11,6 +13,8 @@ def handle_events():
     for event in get_events():
         if event.type == SDL_QUIT:
             running = False
+        elif event.type == SDL_KEYDOWN and event.key in ARROWS:
+            keys.add(event.key)
 
 
 def draw():
