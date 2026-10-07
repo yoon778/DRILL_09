@@ -5,6 +5,7 @@ WIDTH, HEIGHT = 800, 600
 SIZE = 100
 x, y = WIDTH / 2, HEIGHT / 2
 face = 1  # 1: 오른쪽, -1: 왼쪽
+moving = False
 keys = set()
 ARROWS = {SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_DOWN}
 
@@ -21,7 +22,7 @@ def handle_events():
 
 
 def update():
-    global x, y, face
+    global x, y, face, moving
     dx = int(SDLK_RIGHT in keys) - int(SDLK_LEFT in keys)
     dy = int(SDLK_UP in keys) - int(SDLK_DOWN in keys)
     # 위아래로만 움직일 때는 마지막 좌우 방향을 유지한다.
@@ -29,13 +30,15 @@ def update():
         face = dx
     x += dx * 2
     y += dy * 2
+    moving = bool(dx or dy)
 
 
 def draw():
     clear_canvas()
     ground.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
-    # 시트 테두리 1px을 제외한 오른쪽 IDLE 첫 프레임
-    character.clip_draw(1, 301, SIZE, SIZE, x, y)
+    # pico2d는 이미지 아래쪽을 기준으로 행을 자른다.
+    row = 101 if face == 1 else 1
+    character.clip_draw(1, row, SIZE, SIZE, x, y)
     update_canvas()
 
 
