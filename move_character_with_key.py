@@ -1,3 +1,4 @@
+from math import hypot
 from time import perf_counter
 
 from pico2d import *
@@ -37,6 +38,9 @@ def update(dt):
     # 위아래로만 움직일 때는 마지막 좌우 방향을 유지한다.
     if dx:
         face = dx
+    length = hypot(dx, dy)
+    if length:
+        dx, dy = dx / length, dy / length
     x += dx * SPEED * dt
     y += dy * SPEED * dt
     moving = bool(dx or dy)
