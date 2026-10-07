@@ -15,6 +15,8 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key in ARROWS:
             keys.add(event.key)
+        elif event.type == SDL_KEYUP:
+            keys.discard(event.key)
 
 
 def draw():
