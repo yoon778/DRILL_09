@@ -43,6 +43,7 @@ def update(dt):
         dx, dy = dx / length, dy / length
     x += dx * SPEED * dt
     y += dy * SPEED * dt
+    x = min(max(x, SIZE / 2), WIDTH - SIZE / 2)
     moving = bool(dx or dy)
     if previous != (moving, face):
         frame, frame_time = 0, 0.0
