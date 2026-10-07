@@ -1,3 +1,4 @@
+from pathlib import Path
 from math import hypot
 from time import perf_counter
 
@@ -75,22 +76,35 @@ def draw():
 
 
 def main():
-    global ground, character, running
+    global ground, character, running, x, y, face, moving, frame, frame_time
     open_canvas(WIDTH, HEIGHT)
-    hide_lattice()
-    ground = load_image('TUK_GROUND.png')
-    character = load_image('animation_sheet.png')
-    running = True
-    last_time = perf_counter()
-    while running:
-        now = perf_counter()
-        dt = now - last_time
-        last_time = now
-        handle_events()
-        update(dt)
-        draw()
-        delay(0.01)
-    close_canvas()
+    try:
+        hide_lattice()
+        # 소스 옆의 이미지를 사용하므로 다른 위치에서 실행해도 찾을 수 있다.
+        folder = Path(__file__).resolve().parent
+        ground = load_image(str(folder / 'TUK_GROUND.png'))
+        character = load_image(str(folder / 'animation_sheet.png'))
+        x, y = WIDTH / 2, HEIGHT / 2
+        face, moving = 1, False
+        frame, frame_time = 0, 0.0
+        keys.clear()
+        running = True
+        last_time = perf_counter()
+        while running:
+            now = perf_counter()
+            dt = now - last_time
+            last_time = now
+            handle_events()
+            if not running:
+                break
+            update(dt)
+            draw()
+            delay(0.01)
+    except OSError as error:
+        print(f'이미지 파일 확인 필요: {error}')
+        raise
+    finally:
+        close_canvas()
 
 
 if __name__ == '__main__':
