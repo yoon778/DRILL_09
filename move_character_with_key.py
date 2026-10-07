@@ -18,7 +18,7 @@ def main():
                 running = False
         clear_canvas()
         ground.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
-        character.clip_draw(0, 300, SIZE, SIZE, x, y)
+        character.clip_draw(1, 301, SIZE, SIZE, x, y)
         update_canvas()
         delay(0.01)
     close_canvas()
