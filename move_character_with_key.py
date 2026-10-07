@@ -26,6 +26,7 @@ def handle_events():
 
 def update(dt):
     global x, y, face, moving, frame, frame_time
+    previous = (moving, face)
     dx = int(SDLK_RIGHT in keys) - int(SDLK_LEFT in keys)
     dy = int(SDLK_UP in keys) - int(SDLK_DOWN in keys)
     # 위아래로만 움직일 때는 마지막 좌우 방향을 유지한다.
@@ -34,10 +35,13 @@ def update(dt):
     x += dx * 2
     y += dy * 2
     moving = bool(dx or dy)
-    frame_time += dt
-    while frame_time >= FRAME_DELAY:
-        frame = (frame + 1) % 8
-        frame_time -= FRAME_DELAY
+    if previous != (moving, face):
+        frame, frame_time = 0, 0.0
+    else:
+        frame_time += dt
+        while frame_time >= FRAME_DELAY:
+            frame = (frame + 1) % 8
+            frame_time -= FRAME_DELAY
 
 
 def draw():
