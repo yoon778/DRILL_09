@@ -19,6 +19,12 @@ def handle_events():
             keys.discard(event.key)
 
 
+def update():
+    global x
+    dx = int(SDLK_RIGHT in keys)
+    x += dx * 2
+
+
 def draw():
     clear_canvas()
     ground.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
@@ -36,6 +42,7 @@ def main():
     running = True
     while running:
         handle_events()
+        update()
         draw()
         delay(0.01)
     close_canvas()
